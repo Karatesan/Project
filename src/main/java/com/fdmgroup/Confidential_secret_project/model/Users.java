@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class Users {
 	
 	@Id
 	@GeneratedValue
@@ -15,9 +15,9 @@ public class User {
 	private String firstName;
 	private String lastName;
 	
-	public User() {}
+	public Users() {}
 	
-	public User(String firstName, String lastName) {
+	public Users(String firstName, String lastName) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -60,7 +60,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Users other = (Users) obj;
 		return Objects.equals(firstName, other.firstName) && Objects.equals(lastName, other.lastName)
 				&& Objects.equals(userId, other.userId);
 	}

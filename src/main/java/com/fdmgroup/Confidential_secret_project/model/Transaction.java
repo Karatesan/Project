@@ -14,13 +14,14 @@ public class Transaction {
 	@GeneratedValue
 	private Integer transactionId;
 	@OneToOne
-	private User consumer;
+	private Users consumer;
+	@OneToOne
 	private Cart cart;
 	@OneToOne
 	private Coupon couponUsed;
 	
 	public Transaction() {}
-	public Transaction(User consumer, Cart cart, Coupon couponUsed) {
+	public Transaction(Users consumer, Cart cart, Coupon couponUsed) {
 		super();
 		this.consumer = consumer;
 		this.cart = cart;
@@ -32,10 +33,10 @@ public class Transaction {
 	public void setTransactionId(Integer transactionId) {
 		this.transactionId = transactionId;
 	}
-	public User getConsumer() {
+	public Users getConsumer() {
 		return consumer;
 	}
-	public void setConsumer(User consumer) {
+	public void setConsumer(Users consumer) {
 		this.consumer = consumer;
 	}
 	public Cart getCart() {

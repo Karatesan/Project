@@ -15,10 +15,10 @@ public class Coupon {
 	private Integer couponId;
 	private int counter;
 	@OneToOne
-	private User owner;
+	private Users owner;
 	
 	public Coupon() {}
-	public Coupon(int counter, User owner) {
+	public Coupon(int counter, Users owner) {
 		super();
 		this.counter = counter;
 		this.owner = owner;
@@ -35,10 +35,10 @@ public class Coupon {
 	public void setCounter(int counter) {
 		this.counter = counter;
 	}
-	public User getOwner() {
+	public Users getOwner() {
 		return owner;
 	}
-	public void setOwner(User owner) {
+	public void setOwner(Users owner) {
 		this.owner = owner;
 	}
 	@Override

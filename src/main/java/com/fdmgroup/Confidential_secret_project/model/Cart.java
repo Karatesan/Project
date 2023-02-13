@@ -12,21 +12,21 @@ public class Cart {
 	@Id
 	@GeneratedValue
 	private Integer cartId;
-	private double value;
+	private double theValue;
 	private String name;
 	
 	public Cart() {}
 	
 	public Cart(double value, String name) {
 		super();
-		this.value = value;
+		this.theValue = value;
 		this.name = name;
 	}
 	public double getValue() {
-		return value;
+		return theValue;
 	}
 	public void setValue(double value) {
-		this.value = value;
+		this.theValue = value;
 	}
 	public String getName() {
 		return name;
@@ -37,7 +37,7 @@ public class Cart {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, value);
+		return Objects.hash(name, theValue);
 	}
 
 	@Override
@@ -50,12 +50,12 @@ public class Cart {
 			return false;
 		Cart other = (Cart) obj;
 		return Objects.equals(name, other.name)
-				&& Double.doubleToLongBits(value) == Double.doubleToLongBits(other.value);
+				&& Double.doubleToLongBits(theValue) == Double.doubleToLongBits(other.theValue);
 	}
 
 	@Override
 	public String toString() {
-		return "Cart [value=" + value + ", name=" + name + "]";
+		return "Cart [value=" + theValue + ", name=" + name + "]";
 	}
 	
 

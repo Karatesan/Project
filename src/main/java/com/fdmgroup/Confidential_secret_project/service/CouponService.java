@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fdmgroup.Confidential_secret_project.model.Coupon;
-import com.fdmgroup.Confidential_secret_project.model.User;
+import com.fdmgroup.Confidential_secret_project.model.Users;
 import com.fdmgroup.Confidential_secret_project.repository.CouponRepository;
 
 @Service
@@ -24,7 +24,7 @@ public class CouponService {
 	}
 
 	public List<Coupon> findByOwnerId(Integer ownerId) {
-		Optional<User> owner = userService.findById(ownerId);
+		Optional<Users> owner = userService.findById(ownerId);
 		if(owner.isEmpty())  
 			return couponRepo.findByOwner(owner.get());
 		else {
