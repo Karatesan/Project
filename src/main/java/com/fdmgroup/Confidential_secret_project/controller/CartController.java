@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.fdmgroup.Confidential_secret_project.model.Cart;
 import com.fdmgroup.Confidential_secret_project.model.Coupon;
 import com.fdmgroup.Confidential_secret_project.model.Users;
 import com.fdmgroup.Confidential_secret_project.service.CouponService;
@@ -23,7 +24,13 @@ public class CartController {
 	@Autowired
 	private CouponService couponService;
 	
-	@GetMapping("/")
+	@Autowired
+	private Coupon coupon;
+	
+	@Autowired
+	private Cart cart;
+	
+	@GetMapping("/checkUserId")
 	public String checkUserId(Model model, @PathVariable Integer userId) {
 		Optional<Users> idToCheckWith = userService.findById(userId); // check if userId entered at page exists in our Database
 		if (idToCheckWith.isPresent()) { //if userId correct, get all coupons which it possess
@@ -34,6 +41,20 @@ public class CartController {
 			model.addAttribute("errorUserId", "UserID doen't exist");	//if entered userId incorrect- error
 		}
 		return "index";
+	}
+	
+	@GetMapping("/setCartValue")
+	public void checkValueOfCart(Model model, @PathVariable Integer couponId) {
+		double cartValue = cart.getValue();	// get value of current cart
+		Optional<Coupon> pickedCoupon = couponService.findById(couponId); // check what coupon was used
+		if(pickedCoupon.isPresent()) {	// if above coupon exists, reduce value of cart by value of chose coupon
+			double couponValue = coupon.getTheValue();
+			double currentValue= cartValue - couponValue;
+			model.addAttribute("currentValueOfCart", currentValue);
+		}
+		else {	//if coupon doesn't exist, show value of cart unchanged
+			model.addAttribute("currentValueOfCart", cartValue);
+		}
 	}
 
 }
