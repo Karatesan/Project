@@ -18,5 +18,4 @@ public class UserService {
 		Optional<Users> opt = userRepo.findById(userId);
 		return opt;
 	}
-
 }

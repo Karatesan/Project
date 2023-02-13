@@ -10,6 +10,8 @@ import com.fdmgroup.Confidential_secret_project.model.Coupon;
 import com.fdmgroup.Confidential_secret_project.model.Users;
 import com.fdmgroup.Confidential_secret_project.repository.CouponRepository;
 
+import ch.qos.logback.core.joran.conditional.IfAction;
+
 @Service
 public class CouponService {
 	
@@ -29,7 +31,20 @@ public class CouponService {
 			return couponRepo.findByOwner(owner.get());
 		else {
 			return null;
-		}
-		
+		}	
+	}	
+	public void updateCoupon(Coupon coupon) {
+		save(coupon);	
 	}
+
+	public Optional<Coupon> findById(Integer coouponId) {
+		Optional<Coupon> opt = couponRepo.findById(coouponId);
+		return opt;
+	}
+
 }
+
+	
+	
+	
+
