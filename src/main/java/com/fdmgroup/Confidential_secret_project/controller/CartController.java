@@ -9,9 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.fdmgroup.Confidential_secret_project.model.Cart;
 import com.fdmgroup.Confidential_secret_project.model.Coupon;
 import com.fdmgroup.Confidential_secret_project.model.Users;
+import com.fdmgroup.Confidential_secret_project.service.CartService;
 import com.fdmgroup.Confidential_secret_project.service.CouponService;
 import com.fdmgroup.Confidential_secret_project.service.UserService;
 
@@ -25,10 +25,7 @@ public class CartController {
 	private CouponService couponService;
 	
 	@Autowired
-	private Coupon coupon;
-	
-	@Autowired
-	private Cart cart;
+	private CartService cartService;
 	
 	@GetMapping("/checkUserId")
 	public String checkUserId(Model model, @PathVariable Integer userId) {
@@ -45,10 +42,10 @@ public class CartController {
 	
 	@GetMapping("/setCartValue")
 	public void checkValueOfCart(Model model, @PathVariable Integer couponId) {
-		double cartValue = cart.getValue();	// get value of current cart
+		double cartValue = cartService.getValueOfCart(couponId);	// get value of current cart
 		Optional<Coupon> pickedCoupon = couponService.findById(couponId); // check what coupon was used
 		if(pickedCoupon.isPresent()) {	// if above coupon exists, reduce value of cart by value of chose coupon
-			double couponValue = coupon.getTheValue();
+			double couponValue = pickedCoupon.get().getTheValue();
 			double currentValue= cartValue - couponValue;
 			model.addAttribute("currentValueOfCart", currentValue);
 		}
