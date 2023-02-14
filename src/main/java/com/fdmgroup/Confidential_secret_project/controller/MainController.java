@@ -1,5 +1,6 @@
 package com.fdmgroup.Confidential_secret_project.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,25 +31,26 @@ public class MainController {
 	@GetMapping("/")
 	public String pickUserId(ModelMap model) {
 		model.addAttribute("usersFromDB", userService.findAllUsers());
-		System.out.println("main cont====================================================================");
-		System.out.println(userService.findAllUsers());
 		return "users";
 	}
 	
 	//shoud be named the cart and list of coupons 
 	@PostMapping("/submitUserThenCoupon")
 	public String submitUserId(ModelMap model, @RequestParam Integer userId) {
-		System.out.println("============================SubmituserCoupon" + userId );
 		//Optional<Users> thisUser = userService.findById(userId);
+		
 		Users user = userService.findById(userId).get();
 		//model.addAttribute("choseUserId", thisUser);
 		model.addAttribute("user", user);
 		List<Coupon> usersCoupons = couponService.findByOwnerId(userId);
-		System.out.println(" list coupons for user =============================== " + usersCoupons);
+		List<Coupon> activeCoupons = new ArrayList<>();
+		
 		for(Coupon coupon: usersCoupons) {
-			System.out.println(coupon);
+			if(coupon.getCounter()>0) {
+				activeCoupons.add(coupon);
+			}
 		}
-		model.addAttribute("thisUserCoupons", usersCoupons);
+		model.addAttribute("thisUserCoupons", activeCoupons);
 		model.addAttribute("cart",cartService.getCartFromDb().getValue());
 		
 		

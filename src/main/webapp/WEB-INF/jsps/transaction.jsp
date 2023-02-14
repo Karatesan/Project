@@ -11,13 +11,17 @@
 <body>
 <span style="color:red">${errorMessage}</span>
 	<!-- <form action="/submitUserThanCoupon" method="post"> -->
+	The old price was: ${oldCart}      The price after using the coupon is ${cart} 
 	You choose this coupon : ${usedCoupon.couponId} with value ${usedCoupon.theValue} <br>
+	the number of use of this coupon is ${counter}
+	
+	
 	
 	
 
 	
 	
-	<input type="submit" value="Submit">
+	
 	
 	
 </body>
