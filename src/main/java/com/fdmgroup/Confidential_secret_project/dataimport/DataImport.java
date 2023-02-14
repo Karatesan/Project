@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.fdmgroup.Confidential_secret_project.model.Cart;
 import com.fdmgroup.Confidential_secret_project.model.Coupon;
 import com.fdmgroup.Confidential_secret_project.model.Users;
+import com.fdmgroup.Confidential_secret_project.repository.CartRepository;
 import com.fdmgroup.Confidential_secret_project.repository.CouponRepository;
 import com.fdmgroup.Confidential_secret_project.repository.UserRepository;
 
@@ -16,37 +17,44 @@ public class DataImport implements ApplicationRunner {
 	
 	private UserRepository userRepository;
 	private CouponRepository couponRepository;
+	private CartRepository cartRepository;
 	
 	@Autowired
-	public DataImport(UserRepository userRepository, CouponRepository couponRepository) {
+	public DataImport(UserRepository userRepository, CouponRepository couponRepository, CartRepository cartRepository) {
 		this.userRepository = userRepository;
 		this.couponRepository = couponRepository;
+		this.cartRepository = cartRepository;
 	}
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		
-		//Cart testCart = new Cart(1000, "Test Cart");
-		Users customer = new Users("Raul", "Gonzales");
-		Coupon coupon1 = new Coupon(5, 5, customer);
-		Coupon coupon2 = new Coupon(5, 7, customer);
-		Coupon coupon3 = new Coupon(5, 15, customer);
+		Users customer1 = new Users("Jan", "Nowak");
+		Users customer2 = new Users("Niejan", "Nowak");
 		
-		
-		
-		Users customer2 = new Users("Ricardo", "Mora");
-		Coupon coupon4 = new Coupon(5, 5.50, customer);
-		Coupon coupon5 = new Coupon(5, 7.90, customer);
-		Coupon coupon6 = new Coupon(5, 15.30, customer);
-		
-		userRepository.save(customer);
+		userRepository.save(customer1);
 		userRepository.save(customer2);
+				
+		Coupon coupon1 = new Coupon(2, 5, customer1);
+		Coupon coupon2 = new Coupon(3, 7, customer1);
+		Coupon coupon3 = new Coupon(4, 15, customer1);
+		
+		Coupon coupon4 = new Coupon(3, 5.50, customer2);
+		Coupon coupon5 = new Coupon(2, 7.90, customer2);
+		Coupon coupon6 = new Coupon(1, 15.30, customer2);
+		
 		couponRepository.save(coupon1);
 		couponRepository.save(coupon2);
 		couponRepository.save(coupon3);
 		couponRepository.save(coupon4);
 		couponRepository.save(coupon5);
 		couponRepository.save(coupon6);
+		
+		Cart cart1 = new Cart(100.50);
+		
+		cartRepository.save(cart1);
+		
+		
 	}
 
 

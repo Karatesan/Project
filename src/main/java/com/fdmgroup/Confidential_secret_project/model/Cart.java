@@ -13,14 +13,12 @@ public class Cart {
 	@GeneratedValue
 	private Integer cartId;
 	private double theValue;
-	private String name;
 	
 	public Cart() {}
 	
-	public Cart(double value, String name) {
+	public Cart(double value) {
 		super();
 		this.theValue = value;
-		this.name = name;
 	}
 	public double getValue() {
 		return theValue;
@@ -28,16 +26,10 @@ public class Cart {
 	public void setValue(double value) {
 		this.theValue = value;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, theValue);
+		return Objects.hash(theValue);
 	}
 
 	@Override
@@ -49,14 +41,7 @@ public class Cart {
 		if (getClass() != obj.getClass())
 			return false;
 		Cart other = (Cart) obj;
-		return Objects.equals(name, other.name)
-				&& Double.doubleToLongBits(theValue) == Double.doubleToLongBits(other.theValue);
+		return Double.doubleToLongBits(theValue) == Double.doubleToLongBits(other.theValue);
 	}
-
-	@Override
-	public String toString() {
-		return "Cart [value=" + theValue + ", name=" + name + "]";
-	}
-	
 
 }
