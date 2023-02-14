@@ -9,12 +9,15 @@
 <title>1DProc_JN</title>
 </head>
 <body>
-	<c:forEach items="${users}" var="user"> 
 	<form action="/checkUserId" method="post">
 	Choose userId:<br>
-	<select name="userId" value="${users.userId }"></select><br><br>
-	</form>
+	<select name="userId">
+	<c:forEach items="${users}" var="user"> 
+	<option value="${user.userId}">userId</option>
 	</c:forEach>
+	</select><br><br>
+	</form>
+	
 
 </body>
 </html>

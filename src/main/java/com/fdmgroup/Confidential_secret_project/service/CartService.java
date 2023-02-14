@@ -23,9 +23,4 @@ public class CartService {
 		Optional<Cart> cart = findCartById(cartId);
 		return cart.get().getValue();
 	}
-	@Autowired
-	private CartRepository cartRepository;
-    public Optional<Cart> findById(Integer id){
-    	return cartRepository.findById(id);
-    }
 }
