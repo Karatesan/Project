@@ -9,7 +9,7 @@
 <title>1DProj_JN</title>
 </head>
 <body>
-	<form action="/submitUserThanCoupon" method="post">
+	<form action="/submitUserThenCoupon" method="post">
 	Choose coupon:<br>
 	<select name="coupon">
 	<c:forEach items="${thisUserCoupons}" var="userCoupon"> 

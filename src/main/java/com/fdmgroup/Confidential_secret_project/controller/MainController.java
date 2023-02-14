@@ -27,7 +27,7 @@ public class MainController {
 	@GetMapping("/")
 	public String pickUserId(ModelMap model) {
 		model.addAttribute("usersFromDB", userService.findAllUsers());
-		return "user";
+		return "users";
 	}
 	
 	@PostMapping("/submitUserThenCoupon")

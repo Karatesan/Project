@@ -9,7 +9,7 @@
 <title>1DProj_JN</title>
 </head>
 <body>
-	<form action="/submitUserThanCoupon" method="post">
+	<form action="/submitUserThenCoupon" method="post">
 	Choose user:<br>
 	<select name="userId">
 	<c:forEach items="${usersFromDB}" var="userFromDB"> 
