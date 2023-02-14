@@ -41,6 +41,11 @@ public class CouponService {
 		Optional<Coupon> opt = couponRepo.findById(coouponId);
 		return opt;
 	}
+	
+	public List<Coupon> findAllCoupons(){
+		
+		return couponRepo.findAll();
+	}
 
 }
 

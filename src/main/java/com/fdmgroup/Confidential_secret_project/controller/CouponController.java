@@ -19,7 +19,6 @@ public class CouponController {
 	CouponService couponService;
 	
 	
-	
 	@GetMapping("/pickCoupon")
 	public String pickCoupon(ModelMap model, @RequestParam Integer couponId) {
 		
