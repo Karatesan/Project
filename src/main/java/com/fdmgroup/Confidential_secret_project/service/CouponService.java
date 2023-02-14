@@ -25,15 +25,14 @@ public class CouponService {
 		couponRepo.save(coupon);	
 	}
 	
-	
-
 	public List<Coupon> findByOwnerId(Integer ownerId) {
 		Optional<Users> owner = userService.findById(ownerId);
-		if(owner.isEmpty())  
+		if(owner.isPresent())  
 			return couponRepo.findByOwner(owner.get());
 		else {
 			return null;
 		}	
+		
 	}	
 	public void updateCoupon(Coupon coupon) {
 		save(coupon);	

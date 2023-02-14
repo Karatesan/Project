@@ -51,8 +51,10 @@ public class DataImport implements ApplicationRunner {
 		couponRepository.save(coupon6);
 		
 		Cart cart1 = new Cart(100.50);
+		Cart cart2 = new Cart(1000);
 		
 		cartRepository.save(cart1);
+		cartRepository.save(cart2);
 		
 		
 	}

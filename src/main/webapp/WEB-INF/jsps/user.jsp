@@ -6,18 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>1DProc_JN</title>
+<title>1DProj_JN</title>
 </head>
 <body>
-	<form action="/" method="get">
-	Choose userId:<br>
+	<form action="/submitUserThanCoupon" method="post">
+	Choose user:<br>
 	<select name="userId">
 	<c:forEach items="${usersFromDB}" var="userFromDB"> 
-	<option value="${userFromDB.userId}">${userFromDB.userId}</option>
+	<option value="${userFromDB.userId}">UserId: ${userFromDB.userId}; First name: ${userFromDB.firstName}; Last name: ${userFromDB.lastName}</option>
 	</c:forEach>
 	</select><br><br>
+	<input type="submit" value="Submit">
 	</form>
-	
 
 </body>
 </html>
