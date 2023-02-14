@@ -34,7 +34,7 @@ public class CartController {
 		else {	//if coupon doesn't exist, show value of cart unchanged
 			model.addAttribute("currentValueOfCart", cartValue);
 		}
-		return "index";
+		return "coupon";
 	}
 
 }

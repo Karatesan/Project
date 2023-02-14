@@ -9,6 +9,13 @@
 <title>1DProj_JN</title>
 </head>
 <body>
+	<form action="/setCartValue" method="get">
+	Value of Cart: 
+	<c:forEach items="${currentValueOfCart}" var="cartValue"> 
+	${cartValue.theValue}
+	</c:forEach>
+	</form><br><br>
+
 	<form action="/submitUserThenCoupon" method="post">
 	Choose coupon:<br>
 	<select name="coupon">
