@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
+import com.fdmgroup.Confidential_secret_project.model.Cart;
 import com.fdmgroup.Confidential_secret_project.model.Transaction;
 import com.fdmgroup.Confidential_secret_project.model.Users;
 import com.fdmgroup.Confidential_secret_project.repository.TransactionRepository;
@@ -44,9 +45,9 @@ public class TransactionService {
 	}
 	
 	
-	public Transaction creatingAndSavingTransaction( ModelMap model,Integer userId,Integer cartId, Integer usedCouponId) {
+	public Transaction creatingAndSavingTransaction( ModelMap model,Integer userId,Cart cart, Integer usedCouponId) {
 		
-		Transaction transaction = new Transaction(userService.findById(userId).get(),cartService.findCartById(cartId).get(),couponService.findById(usedCouponId).get());
+		Transaction transaction = new Transaction(userService.findById(userId).get(),cart,couponService.findById(usedCouponId).get());
 		saveTransaction(transaction);
 		
 		/// na moment tworzenia transakcji to counter couponu jest taki jak był w moment uzycia a potem juz --;

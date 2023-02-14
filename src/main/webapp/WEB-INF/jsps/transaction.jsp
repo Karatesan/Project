@@ -9,15 +9,16 @@
 <title>1DProj_JN</title>
 </head>
 <body>
-	<form action="/submitUserThanCoupon" method="post">
-	Choose coupon:<br>
-	<select name="coupon">
-	<c:forEach items="${thisUserCoupons}" var="userCoupon"> 
-	<option value="${userCoupon.couponId}">Value of discount: ${userCoupon.theValue}; Left times to use: ${userCoupon.counter}</option>
-	</c:forEach>
-	</select><br>
+<span style="color:red">${errorMessage}</span>
+	<!-- <form action="/submitUserThanCoupon" method="post"> -->
+	You choose this coupon : ${usedCoupon.couponId} with value ${usedCoupon.theValue} <br>
+	
+	
+
+	
+	
 	<input type="submit" value="Submit">
-	</form>
+	
 	
 </body>
 </html>

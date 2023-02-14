@@ -9,14 +9,12 @@
 <title>1DProj_JN</title>
 </head>
 <body>
-	<form action="/setCartValue" method="get">
-	Value of Cart: 
-	<c:forEach items="${currentValueOfCart}" var="cartValue"> 
-	${cartValue.theValue}
-	</c:forEach>
-	</form><br><br>
+	<form action="/goToTransaction" method="post">
+	Value of Cart: ${cart}
+	
+	
 
-	<form action="/submitUserThenCoupon" method="post">
+	<!-- <form action="/submitUserThenCoupon" method="post">  -->
 	Choose coupon:<br>
 	<select name="coupon">
 	<c:forEach items="${thisUserCoupons}" var="userCoupon"> 
@@ -24,7 +22,7 @@
 	</c:forEach>
 	</select><br>
 	<input type="submit" value="Submit">
-	</form>
-	
+	<input type="hidden" name="couponId" value="${userCoupon.couponId}"><br>
+	</form><br><br>
 </body>
 </html>

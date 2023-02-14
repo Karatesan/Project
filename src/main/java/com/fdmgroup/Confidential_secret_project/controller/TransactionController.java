@@ -22,32 +22,25 @@ public class TransactionController {
 	@Autowired
 	private CouponService couponService;
 	
-	@Autowired 
-	private UserService userService;
-	
-	@Autowired 
-	private CartService cartService;	
+		
 	
 	
 	
-	@GetMapping("/goToTransaction")
-	public String getTransaction(ModelMap model, @ModelAttribute("cartId") Integer cartId, @ModelAttribute("userId") Integer userId, @ModelAttribute("couponId") Integer usedCouponId) {
-		if(!cartService.findCartById(cartId).isPresent()) {
-		model.addAttribute("errorMessage", "Cart does not exist");
-		}
-		if(!userService.findById(userId).isPresent()) {
-			model.addAttribute("errorMessage", "User does not exist");
-			}	
+	@PostMapping("/goToTransaction")
+	public String getTransaction(ModelMap model, @ModelAttribute("couponId") Integer usedCouponId) {
+			System.out.println("======= in go to transaction " + usedCouponId);
+		
 		if(!couponService.findById(usedCouponId).isPresent()) {
 			model.addAttribute("errorMessage", "Coupon does not exist");
 			}
 		
 		model.addAttribute("usedCoupon",couponService.findById(usedCouponId).get());
-		model.addAttribute("cart",cartService.findCartById(cartId).get());
-		model.addAttribute("user",userService.findById(userId).get());
+		//model.addAttribute("cart",cartService.getCartFromDb().getValue()-couponService.findById(usedCouponId).get().getTheValue());
+		//model.addAttribute("user",userService.findById(userId).get());
+		//model.addAttribute("transaction",transactionService.creatingAndSavingTransaction(model,userId, cartService.getCartFromDb(), usedCouponId ))
 		
 		return "transaction";
-	}
+	} 
 	
 	
 	@PostMapping("/transactionConfirmation")
@@ -57,7 +50,7 @@ public class TransactionController {
 			
 			if(confirmation.equals("confirm")) {
 				if(transactionService.checkObjectFortransaction(model, userId, cartId, usedCouponId)) {
-					  model.addAttribute("transaction",transactionService.creatingAndSavingTransaction(model,userId, cartId, usedCouponId ));
+					  ;
 					  model.addAttribute("confirmation",confirmation);
 				}
 				

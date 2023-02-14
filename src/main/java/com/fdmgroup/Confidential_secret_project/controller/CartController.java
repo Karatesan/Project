@@ -24,6 +24,7 @@ public class CartController {
 	
 	@GetMapping("/setCartValue")
 	public String checkValueOfCart(ModelMap model, @PathVariable Integer couponId) {
+		System.out.println("/set cart value                 ==================== couponId = " + couponId);
 		double cartValue = cartService.getValueOfCart(couponId);	// get value of current cart
 		Optional<Coupon> pickedCoupon = couponService.findById(couponId); // check what coupon was used
 		if(pickedCoupon.isPresent()) {	// if above coupon exists, reduce value of cart by value of chose coupon
@@ -34,7 +35,7 @@ public class CartController {
 		else {	//if coupon doesn't exist, show value of cart unchanged
 			model.addAttribute("currentValueOfCart", cartValue);
 		}
-		return "coupon";
+		return "transaction";
 	}
 
 }
