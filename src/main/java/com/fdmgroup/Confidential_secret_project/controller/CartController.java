@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -28,7 +28,7 @@ public class CartController {
 	private CartService cartService;
 	
 	@GetMapping("/checkUserId")
-	public String checkUserId(Model model, @PathVariable Integer userId) {
+	public String checkUserId(ModelMap model, @PathVariable Integer userId) {
 		Optional<Users> idToCheckWith = userService.findById(userId); // check if userId entered at page exists in our Database
 		if (idToCheckWith.isPresent()) { //if userId correct, get all coupons which it possess
 			List<Coupon> ownedByUserCoupons = couponService.findByOwnerId(userId);
@@ -41,7 +41,7 @@ public class CartController {
 	}
 	
 	@GetMapping("/setCartValue")
-	public void checkValueOfCart(Model model, @PathVariable Integer couponId) {
+	public void checkValueOfCart(ModelMap model, @PathVariable Integer couponId) {
 		double cartValue = cartService.getValueOfCart(couponId);	// get value of current cart
 		Optional<Coupon> pickedCoupon = couponService.findById(couponId); // check what coupon was used
 		if(pickedCoupon.isPresent()) {	// if above coupon exists, reduce value of cart by value of chose coupon
