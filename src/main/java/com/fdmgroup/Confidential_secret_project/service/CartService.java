@@ -14,13 +14,14 @@ public class CartService {
 	@Autowired
 	private CartRepository cartRepo;
 	
-	public Optional<Cart> findCartById(Integer cartId) {
-		Optional<Cart> cart= cartRepo.findById(cartId);
-		return cart;
-	}
-	
 	public double getValueOfCart(Integer cartId) {
 		Optional<Cart> cart = findCartById(cartId);
 		return cart.get().getValue();
 	}
+
+	public Optional<Cart> findCartById(Integer cartId) {
+		Optional<Cart> cart= cartRepo.findById(cartId);
+		return cart;
+	}
+
 }

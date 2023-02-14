@@ -5,12 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.ModelMap;
 
-import com.fdmgroup.Confidential_secret_project.model.Cart;
-import com.fdmgroup.Confidential_secret_project.model.Coupon;
 import com.fdmgroup.Confidential_secret_project.model.Transaction;
 import com.fdmgroup.Confidential_secret_project.model.Users;
 import com.fdmgroup.Confidential_secret_project.repository.TransactionRepository;
@@ -50,7 +46,7 @@ public class TransactionService {
 	
 	public Transaction creatingAndSavingTransaction( ModelMap model,Integer userId,Integer cartId, Integer usedCouponId) {
 		
-		Transaction transaction = new Transaction(userService.findById(userId).get(),cartService.findById(cartId).get(),couponService.findById(usedCouponId).get());
+		Transaction transaction = new Transaction(userService.findById(userId).get(),cartService.findCartById(cartId).get(),couponService.findById(usedCouponId).get());
 		saveTransaction(transaction);
 		
 		/// na moment tworzenia transakcji to counter couponu jest taki jak był w moment uzycia a potem juz --;
@@ -64,7 +60,7 @@ public class TransactionService {
 	
 	
 	public boolean checkObjectFortransaction(ModelMap model,Integer userId,Integer cartId, Integer usedCouponId) {
-		if(!cartService.findById(cartId).isPresent()) {
+		if(!cartService.findCartById(cartId).isPresent()) {
 			model.addAttribute("errorMessage", "Cart does not exist");
 			return false;
 			}

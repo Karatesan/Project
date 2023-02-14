@@ -31,7 +31,7 @@ public class TransactionController {
 	
 	@GetMapping("/goToTransaction")
 	public String getTransaction(ModelMap model, @ModelAttribute("cartId") Integer cartId, @ModelAttribute("userId") Integer userId, @ModelAttribute("couponId") Integer usedCouponId) {
-		if(!cartService.findById(cartId).isPresent()) {
+		if(!cartService.findCartById(cartId).isPresent()) {
 		model.addAttribute("errorMessage", "Cart does not exist");
 		}
 		if(!userService.findById(userId).isPresent()) {
@@ -42,7 +42,7 @@ public class TransactionController {
 			}
 		
 		model.addAttribute("usedCoupon",couponService.findById(usedCouponId).get());
-		model.addAttribute("cart",cartService.findById(cartId).get());
+		model.addAttribute("cart",cartService.findCartById(cartId).get());
 		model.addAttribute("user",userService.findById(userId).get());
 		
 		return "transaction";
