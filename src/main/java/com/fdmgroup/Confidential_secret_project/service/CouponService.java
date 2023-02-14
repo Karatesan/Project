@@ -24,6 +24,8 @@ public class CouponService {
 	public void save(Coupon coupon) {
 		couponRepo.save(coupon);	
 	}
+	
+	
 
 	public List<Coupon> findByOwnerId(Integer ownerId) {
 		Optional<Users> owner = userService.findById(ownerId);
