@@ -1,7 +1,9 @@
 package com.fdmgruop.service;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -14,7 +16,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.ui.ModelMap;
 
+import com.fdmgroup.Confidential_secret_project.model.Cart;
+import com.fdmgroup.Confidential_secret_project.model.Coupon;
 import com.fdmgroup.Confidential_secret_project.model.Transaction;
 import com.fdmgroup.Confidential_secret_project.model.Users;
 import com.fdmgroup.Confidential_secret_project.repository.TransactionRepository;
@@ -76,4 +81,74 @@ public class TransactionServiceTest {
         assertTrue(actualTransaction.isPresent());
         assertEquals(expectedTransaction, actualTransaction.get());
     }
+    
+
+	@Test
+	public void testCreatingAndSavingTransaction() {
+		Users user = new Users();
+		user.setUserId(1);
+		Cart cart = new Cart();
+		cart.setCartId(1);
+		Coupon coupon = new Coupon();
+		coupon.setCouponId(1);
+		coupon.setCounter(5);
+
+		when(userService.findById(1)).thenReturn(Optional.of(user));
+		when(cartService.findCartById(1)).thenReturn(Optional.of(cart));
+		when(couponService.findById(1)).thenReturn(Optional.of(coupon));
+		when(couponService.save(coupon)).thenReturn(coupon);
+
+		Transaction transaction = transactionService.creatingAndSavingTransaction(new ModelMap(), 1, cart, 1);
+
+		assertEquals(user, transaction.getConsumer());
+		assertEquals(cart, transaction.getCart());
+		assertEquals(coupon, transaction.getCouponUsed());
+		verify(transactionRepository, times(1)).save(transaction);
+		verify(couponService, times(1)).save(coupon);
+		assertEquals(4, coupon.getCounter());
+	}
+	
+	@Test
+	public void testCheckObjectForTransactionAllObjectsExist() {
+		Users user = new Users();
+		user.setUserId(1);
+		Cart cart = new Cart();
+		cart.setCartId(1);
+		Coupon coupon = new Coupon();
+		coupon.setCouponId(1);
+
+		when(userService.findById(1)).thenReturn(Optional.of(user));
+		when(cartService.findCartById(1)).thenReturn(Optional.of(cart));
+		when(couponService.findById(1)).thenReturn(Optional.of(coupon));
+
+		assertTrue(transactionService.checkObjectFortransaction(new ModelMap(), 1, 1, 1));
+	}
+
+	@Test
+	public void testCheckObjectForTransactionCartDoesNotExist() {
+		Users user = new Users();
+		user.setUserId(1);
+		Coupon coupon = new Coupon();
+		coupon.setCouponId(1);
+
+		when(userService.findById(1)).thenReturn(Optional.of(user));
+		when(cartService.findCartById(1)).thenReturn(Optional.empty());
+		when(couponService.findById(1)).thenReturn(Optional.of(coupon));
+
+		assertFalse(transactionService.checkObjectFortransaction(new ModelMap(), 1, 1, 1));
+	}
+
+	@Test
+	public void testCheckObjectForTransactionUserDoesNotExist() {
+		Cart cart = new Cart();
+		cart.setCartId(1);
+		Coupon coupon = new Coupon();
+		coupon.setCouponId(1);
+
+		when(userService.findById(1)).thenReturn(Optional.empty());
+		when(cartService.findCartById(1)).thenReturn(Optional.of(cart));
+		when(couponService.findById(1)).thenReturn(Optional.of(coupon));
+
+		assertFalse(transactionService.checkObjectFortransaction(new ModelMap(), 1, 1, 1));
+	}
 }
