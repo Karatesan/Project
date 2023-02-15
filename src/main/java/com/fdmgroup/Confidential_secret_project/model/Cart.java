@@ -20,6 +20,15 @@ public class Cart {
 		super();
 		this.theValue = value;
 	}
+	
+	public Integer getCartId() {
+		return cartId;
+	}
+
+	public void setCartId(Integer cartId) {
+		this.cartId = cartId;
+	}
+
 	public double getValue() {
 		return theValue;
 	}

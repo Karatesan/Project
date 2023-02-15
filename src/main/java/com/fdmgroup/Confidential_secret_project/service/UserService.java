@@ -13,7 +13,7 @@ import com.fdmgroup.Confidential_secret_project.repository.UserRepository;
 public class UserService {
 	
 	@Autowired
-	UserRepository userRepo;
+	private UserRepository userRepo;
 	
 	public Optional<Users> findById(Integer userId) {
 		Optional<Users> opt = userRepo.findById(userId);

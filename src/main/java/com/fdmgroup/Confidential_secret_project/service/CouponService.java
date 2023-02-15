@@ -16,10 +16,10 @@ import ch.qos.logback.core.joran.conditional.IfAction;
 public class CouponService {
 	
 	@Autowired
-	CouponRepository couponRepo;
+	private CouponRepository couponRepo;
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	public void save(Coupon coupon) {
 		couponRepo.save(coupon);	
@@ -32,22 +32,20 @@ public class CouponService {
 		else {
 			return null;
 		}	
-		
 	}	
+	
 	public void updateCoupon(Coupon coupon) {
 		save(coupon);	
 	}
 
-	public Optional<Coupon> findById(Integer coouponId) {
-		Optional<Coupon> opt = couponRepo.findById(coouponId);
+	public Optional<Coupon> findById(Integer couponId) {
+		Optional<Coupon> opt = couponRepo.findById(couponId);
 		return opt;
 	}
 	
 	public List<Coupon> findAllCoupons(){
-		
 		return couponRepo.findAll();
 	}
-
 }
 
 	

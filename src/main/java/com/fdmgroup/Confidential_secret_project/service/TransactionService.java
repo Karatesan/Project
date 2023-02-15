@@ -30,7 +30,7 @@ public class TransactionService {
 		repository.save(transaction);
 	}
 	
-	public void deletetransaction(Transaction transaction ) {
+	public void deleteTransaction(Transaction transaction ) {
 		repository.delete(transaction);
 	}
 	
